@@ -1,6 +1,6 @@
-package com.example.examplemod;
+package com.storios.storiosmod;
 
-import com.example.examplemod.register.BlockRegister;
+import com.storios.storiosmod.register.BlockRegister;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;

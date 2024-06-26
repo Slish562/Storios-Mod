@@ -1,4 +1,4 @@
-package com.example.examplemod.block;
+package com.storios.storiosmod.block;
 
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.Direction;
