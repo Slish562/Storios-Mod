@@ -1,4 +1,4 @@
-package com.storios.storiosmod.register;
+package com.storios.storiosmod.registries;
 
 import com.storios.storiosmod.StoriosMod;
 import com.storios.storiosmod.block.DirectionalBlock;
@@ -10,7 +10,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 
-public class BlockRegister {
+public class BlockRegistry {
     private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, StoriosMod.MODID);
     private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, StoriosMod.MODID);
 
@@ -19,5 +19,5 @@ public class BlockRegister {
         BLOCK_ENTITIES.register(eventBus);
     }
 
-    public static final RegistryObject<Block> SCROLL_FORGE_BLOCK = BLOCKS.register("mythril", DirectionalBlock::new);
+    public static final RegistryObject<Block> MYTHRIL_BLOCK = BLOCKS.register("mythril_cluster", DirectionalBlock::new);
 }

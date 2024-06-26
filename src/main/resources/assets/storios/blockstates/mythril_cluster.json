@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "storios:block/mythril_cluster"
+    }
+  }
+}
