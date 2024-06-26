@@ -43,8 +43,8 @@ public class StoriosMod {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup);
 
-        BlockRegistry.register(modEventBus);
         ItemRegistry.register(modEventBus);
+        BlockRegistry.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
 
