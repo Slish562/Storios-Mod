@@ -31,11 +31,11 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 
-// The value here should match an entry in the META-INF/mods.toml file
+// The value here should match an entry.json in the META-INF/mods.toml file
 @Mod(StoriosMod.MODID)
 public class StoriosMod {
 
-    public static final String MODID = "storios";
+    public static final String MODID = "storios_mod";
 
     private static final Logger LOGGER = LogUtils.getLogger();
 

@@ -1,5 +1,5 @@
 {
-  "parent": "storios:block/mythril_cluster",
+  "parent": "storios_mod:block/mythril_cluster",
   "display": {
     "thirdperson_righthand": {
       "rotation": [20, 0, 0],

@@ -3,9 +3,9 @@
   "texture_size": [32, 32],
   "parent": "block/block",
   "textures": {
-    "all": "storios:block/mythril_cluster_texture",
-    "particle": "storios:block/mythril_cluster_texture",
-    "0": "storios:block/mythril_cluster_texture"
+    "all": "storios_mod:block/mythril_cluster_texture",
+    "particle": "storios_mod:block/mythril_cluster_texture",
+    "0": "storios_mod:block/mythril_cluster_texture"
   },
   "elements": [
     {
