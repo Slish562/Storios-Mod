@@ -1,6 +1,6 @@
-package com.storios.storiosmod.registries;
+package com.io.storiosmod.registries;
 
-import com.storios.storiosmod.StoriosMod;
+import com.io.storiosmod.StoriosMod;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -14,5 +14,5 @@ public class ItemRegistry {
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }
-    public static final RegistryObject<Item> INSCRIPTION_TABLE_BLOCK_ITEM = ITEMS.register("mythril_cluster", () -> new BlockItem(BlockRegistry.MYTHRIL_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INSCRIPTION_TABLE_BLOCK_ITEM = ITEMS.register("mythril_cluster_item", () -> new BlockItem(BlockRegistry.MYTHRIL_BLOCK.get(), new Item.Properties()));
 }

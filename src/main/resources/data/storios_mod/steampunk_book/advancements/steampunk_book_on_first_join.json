@@ -1,12 +1,20 @@
 {
-  "criteria": {
-    "tick": {
-      "trigger": "minecraft:tick"
+  "type": "advancement_reward",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "patchouli:guide_book",
+          "functions": [
+            {
+              "function": "set_nbt",
+              "tag": "{\"patchouli:book\": \"steampunk_book\"}"
+            }
+          ]
+        }
+      ]
     }
-  },
-  "rewards": {
-    "loot": [
-      "steampunk_book:steampunk_book_on_first_join"
-    ]
-  }
+  ]
 }

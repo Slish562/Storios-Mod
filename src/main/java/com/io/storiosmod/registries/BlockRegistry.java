@@ -1,7 +1,7 @@
-package com.storios.storiosmod.registries;
+package com.io.storiosmod.registries;
 
-import com.storios.storiosmod.StoriosMod;
-import com.storios.storiosmod.block.DirectionalBlock;
+import com.io.storiosmod.block.DirectionalBlock;
+import com.io.storiosmod.StoriosMod;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
