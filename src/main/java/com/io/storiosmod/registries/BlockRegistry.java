@@ -19,5 +19,5 @@ public class BlockRegistry {
         BLOCK_ENTITIES.register(eventBus);
     }
 
-    public static final RegistryObject<Block> MYTHRIL_BLOCK = BLOCKS.register("mythril_cluster", DirectionalBlock::new);
+    public static final RegistryObject<Block> MYTHRIL_BLOCK = BLOCKS.register("mythril_cluster", () -> new DirectionalBlock());
 }
