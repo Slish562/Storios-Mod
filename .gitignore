@@ -17,7 +17,7 @@ out
 build
 .gradle
 
-# other
+# util
 eclipse
 run
 

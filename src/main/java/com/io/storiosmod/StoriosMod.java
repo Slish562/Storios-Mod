@@ -1,6 +1,7 @@
 package com.io.storiosmod;
 
 import com.io.storiosmod.registries.BlockRegistry;
+import com.io.storiosmod.registries.CreativeTabRegistry;
 import com.io.storiosmod.registries.ItemRegistry;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
@@ -31,9 +32,9 @@ public class StoriosMod {
 
         ItemRegistry.register(modEventBus);
         BlockRegistry.register(modEventBus);
+        CreativeTabRegistry.register(modEventBus);
 
-
-        // Register ourselves for server and other game events we are interested in
+        // Register ourselves for server and util game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }
 

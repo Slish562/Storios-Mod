@@ -1,0 +1,6 @@
+{    
+"parent": "item/generated",    
+"textures": {        
+  "layer0": "storios_mod:item/gears/steel_gear"   
+   }
+  }
