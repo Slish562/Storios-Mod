@@ -1,6 +1,6 @@
 {    
 "parent": "item/generated",    
 "textures": {        
-  "layer0": "storios_mod:item/latter"
+  "layer0": "storios_mod:item/letter"
    }
   }

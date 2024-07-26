@@ -33,7 +33,7 @@ public class CreativeTabRegistry {
                 entries.accept(ItemRegistry.JADE_GEAR.get());
                 entries.accept(ItemRegistry.IRIDIUM_GEAR.get());
                 entries.accept(ItemRegistry.NOTE.get());
-                entries.accept(ItemRegistry.LATTER.get());
+                entries.accept(ItemRegistry.LETTER.get());
                 entries.accept(ItemRegistry.SCROLL.get());
             })
             .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
