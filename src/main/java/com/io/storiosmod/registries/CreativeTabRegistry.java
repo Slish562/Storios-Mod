@@ -24,12 +24,17 @@ public class CreativeTabRegistry {
             .title(Component.translatable("itemGroup." + StoriosMod.MODID + ".story_items_tab"))
             .icon(() -> new ItemStack(ItemRegistry.COPPER_GEAR.get()))
             .displayItems((enabledFeatures, entries) -> {
+                entries.accept(ItemRegistry.MYTHRIL_CLASTER.get());
+                entries.accept(ItemRegistry.MYTHRIL.get());
+                entries.accept(ItemRegistry.CRYOLIS.get());
                 entries.accept(ItemRegistry.COPPER_GEAR.get());
                 entries.accept(ItemRegistry.STEEL_GEAR.get());
                 entries.accept(ItemRegistry.COBALT_GEAR.get());
                 entries.accept(ItemRegistry.JADE_GEAR.get());
                 entries.accept(ItemRegistry.IRIDIUM_GEAR.get());
-                entries.accept(ItemRegistry.MYTHRIL_CLASTER.get());
+                entries.accept(ItemRegistry.NOTE.get());
+                entries.accept(ItemRegistry.LATTER.get());
+                entries.accept(ItemRegistry.SCROLL.get());
             })
             .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
             .build());
