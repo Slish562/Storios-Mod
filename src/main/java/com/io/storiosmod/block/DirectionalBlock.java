@@ -35,7 +35,7 @@ public class DirectionalBlock extends Block implements SimpleWaterloggedBlock {
     private static final VoxelShape SHAPE_EW = Block.box(0.0D, 1.0D, 1.0D, 16.0D, 15.0D, 15.0D);
 
     public DirectionalBlock() {
-        super(BlockBehaviour.Properties.of().mapColor(DyeColor.WHITE).requiresCorrectToolForDrops().strength(2F, 6.0F).noOcclusion().dynamicShape().lightLevel((i) -> 3).emissiveRendering((state, level, pos) -> true));
+        super(BlockBehaviour.Properties.of().mapColor(DyeColor.WHITE).requiresCorrectToolForDrops().strength(2F, 6.0F).noOcclusion().dynamicShape().lightLevel((i) -> 2).emissiveRendering((state, level, pos) -> true));
 
     }
 
