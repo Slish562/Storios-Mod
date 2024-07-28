@@ -1,6 +1,6 @@
 {    
 "parent": "item/generated",    
 "textures": {        
-  "layer0": "storios_mod:item/crystals/cryolis"
+  "layer0": "storios_mod:item/crystals/fiorellite"
    }
   }

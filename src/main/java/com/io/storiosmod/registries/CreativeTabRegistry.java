@@ -26,7 +26,8 @@ public class CreativeTabRegistry {
             .displayItems((enabledFeatures, entries) -> {
                 entries.accept(ItemRegistry.MYTHRIL_CLASTER.get());
                 entries.accept(ItemRegistry.MYTHRIL.get());
-                entries.accept(ItemRegistry.CRYOLIS.get());
+                entries.accept(ItemRegistry.FIORELLITE.get());
+                entries.accept(ItemRegistry.LUMINARIS.get());
                 entries.accept(ItemRegistry.COPPER_GEAR.get());
                 entries.accept(ItemRegistry.STEEL_GEAR.get());
                 entries.accept(ItemRegistry.COBALT_GEAR.get());

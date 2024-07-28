@@ -1,0 +1,15 @@
+{
+  "item.storios_mod.mythril": "Mythril",
+  "item.storios_mod.mythril_cluster": "Mythril Cluster",
+  "item.storios_mod.fiorellite": "Fiorellite",
+  "item.storios_mod.luminaris": "Luminaris",
+  "item.storios_mod.copper_gear": "Copper Gear",
+  "item.storios_mod.steel_gear": "Steel Gear",
+  "item.storios_mod.cobalt_gear": "Cobalt Gear",
+  "item.storios_mod.jade_gear": "Jade Gear",
+  "item.storios_mod.iridium_gear": "Iridium Gear",
+
+  "block.storios_mod.mythril_cluster": "Mythril Cluster",
+
+  "itemGroup.storios_mod.story_items_tab": "Story Items"
+}
