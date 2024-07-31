@@ -72,6 +72,8 @@ repositories {
     maven { url = "https://cursemaven.com" }
     maven { url = "https://maven.blamejared.com" }
     maven { url = "https://maven.kosmx.dev/" }
+    maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'}
+
 }
 
 dependencies {
@@ -80,6 +82,9 @@ dependencies {
 
     // MIXINS *****************************************************************************************************
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
+
+    // GECKOLIB ********************************************************************************************************
+    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-1.20.1:${geckolib_version}")
 
     // JEI ********************************************************************************************************
     compileOnly fg.deobf("mezz.jei:jei-${jei_mc_version}-common-api:${jei_version}")
@@ -95,11 +100,10 @@ dependencies {
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}")
 
     // APOTHEOSIS
-    compileOnly fg.deobf("curse.maven:apotheosis-${apotheosis_version}")
-    runtimeOnly fg.deobf("curse.maven:apotheosis-${apotheosis_version}")
-    runtimeOnly fg.deobf("curse.maven:placebo-${placebo_version}")
-    runtimeOnly fg.deobf("curse.maven:attributeslib-${attributeslib_version}")
-    runtimeOnly fg.deobf("curse.maven:apothic-curios-950712:5108914")
+  //  compileOnly fg.deobf("curse.maven:apotheosis-${apotheosis_version}")
+   // runtimeOnly fg.deobf("curse.maven:apotheosis-${apotheosis_version}")
+  //  runtimeOnly fg.deobf("curse.maven:placebo-${placebo_version}")
+  //  runtimeOnly fg.deobf("curse.maven:attributeslib-${attributeslib_version}")
 
     //QOL
     runtimeOnly fg.deobf("curse.maven:mouse-tweaks-60089:3871353")
