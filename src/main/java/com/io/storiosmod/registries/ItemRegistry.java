@@ -16,7 +16,7 @@ public class ItemRegistry {
         ITEMS.register(eventBus);
     }
     public static final RegistryObject<Item> MYTHRIL_CLASTER = ITEMS.register("mythril_cluster", () -> new BlockItem(BlockRegistry.MYTHRIL_BLOCK.get(), new Item.Properties().rarity(Rarity.EPIC)));
-
+    //public static final RegistryObject<Item> TEST_GEOB = ITEMS.register("test_geob", () -> new BlockItem(BlockRegistry.TESTGEOBLOCK.get(), new Item.Properties().rarity(Rarity.EPIC)));
 
     public static final RegistryObject<Item> COPPER_GEAR = ITEMS.register("copper_gear", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> STEEL_GEAR = ITEMS.register("steel_gear", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));

@@ -1,11 +1,16 @@
 package com.io.storiosmod;
 
+import com.io.storiosmod.entity.client.TestGeoBlockRenderer;
 import com.io.storiosmod.registries.BlockRegistry;
 import com.io.storiosmod.registries.CreativeTabRegistry;
 import com.io.storiosmod.registries.ItemRegistry;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -17,6 +22,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
+import software.bernie.geckolib.GeckoLib;
 
 // The value here should match an entry.json in the META-INF/mods.toml file
 @Mod(StoriosMod.MODID)
@@ -28,12 +34,13 @@ public class StoriosMod {
 
     public StoriosMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        modEventBus.addListener(this::commonSetup);
 
         ItemRegistry.register(modEventBus);
         BlockRegistry.register(modEventBus);
         CreativeTabRegistry.register(modEventBus);
+        GeckoLib.initialize();
 
+        modEventBus.addListener(this::commonSetup);
         // Register ourselves for server and util game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -64,5 +71,12 @@ public class StoriosMod {
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }
+        /*
+        @SubscribeEvent
+        public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
+                event.registerBlockEntityRenderer(BlockRegistry.TESTGEOBLOCK_BE.get(), context -> new TestGeoBlockRenderer());
+            }
+
+         */
     }
 }
