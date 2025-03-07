@@ -36,6 +36,11 @@ public class CreativeTabRegistry {
                 entries.accept(ItemRegistry.NOTE.get());
                 entries.accept(ItemRegistry.LETTER.get());
                 entries.accept(ItemRegistry.SCROLL.get());
+                entries.accept(ItemRegistry.BANDAGE.get());
+                entries.accept(ItemRegistry.PAINKILLER.get());
+                entries.accept(ItemRegistry.MORPHINE.get());
+                entries.accept(ItemRegistry.MEDKIT.get());
+
             })
             .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
             .build());

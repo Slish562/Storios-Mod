@@ -1,6 +1,10 @@
 package com.io.storiosmod.registries;
 
 import com.io.storiosmod.StoriosMod;
+import com.io.storiosmod.item.medic.BandageItem;
+import com.io.storiosmod.item.medic.MedKitItem;
+import com.io.storiosmod.item.medic.MorphineItem;
+import com.io.storiosmod.item.medic.PainKillerItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
@@ -17,6 +21,11 @@ public class ItemRegistry {
     }
     public static final RegistryObject<Item> MYTHRIL_CLASTER = ITEMS.register("mythril_cluster", () -> new BlockItem(BlockRegistry.MYTHRIL_BLOCK.get(), new Item.Properties().rarity(Rarity.EPIC)));
     //public static final RegistryObject<Item> TEST_GEOB = ITEMS.register("test_geob", () -> new BlockItem(BlockRegistry.TESTGEOBLOCK.get(), new Item.Properties().rarity(Rarity.EPIC)));
+
+    public static final RegistryObject<Item> BANDAGE = ITEMS.register("bandage", () -> new BandageItem(new Item.Properties().rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> PAINKILLER = ITEMS.register("painkiller", () -> new PainKillerItem(new Item.Properties().rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> MORPHINE = ITEMS.register("morphine", () -> new MorphineItem(new Item.Properties().rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> MEDKIT = ITEMS.register("medkit", () -> new MedKitItem(new Item.Properties().rarity(Rarity.UNCOMMON)));
 
     public static final RegistryObject<Item> COPPER_GEAR = ITEMS.register("copper_gear", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> STEEL_GEAR = ITEMS.register("steel_gear", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
