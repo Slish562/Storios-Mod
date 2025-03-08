@@ -9,6 +9,12 @@
   "item.storios_mod.jade_gear": "Jade Gear",
   "item.storios_mod.iridium_gear": "Iridium Gear",
 
+  "item.storios_mod.bandage": "Bandage",
+  "item.storios_mod.painkiller": "Painkiller",
+  "item.storios_mod.morphine": "Morphine",
+  "item.storios_mod.medkit": "Medkit",
+
+
   "block.storios_mod.mythril_cluster": "Mythril Cluster",
 
   "itemGroup.storios_mod.story_items_tab": "Story Items"

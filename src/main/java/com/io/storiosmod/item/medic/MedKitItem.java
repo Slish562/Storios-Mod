@@ -39,7 +39,7 @@ public class MedKitItem extends Item {
                 player.heal(HEAL_AMOUNT);
                 stack.hurt(1, level.random, null);
 
-                player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 2000, 1));
+                player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 800, 1));
 
                 player.getCooldowns().addCooldown(this, COOLDOWN_TICKS);
             }

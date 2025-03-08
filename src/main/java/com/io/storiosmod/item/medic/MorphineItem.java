@@ -38,7 +38,7 @@ public class MorphineItem extends Item {
                 player.heal(HEAL_AMOUNT);
                 stack.hurt(1, level.random, null);
 
-                player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 1000, 0));
+                player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 500, 0));
                 level.playSound(null, player.getX(), player.getY(), player.getZ(),
                         SoundEvents.GENERIC_DRINK, SoundSource.PLAYERS, 0.5F, 0.8F);
 
