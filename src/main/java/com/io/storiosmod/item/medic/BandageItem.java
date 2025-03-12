@@ -14,12 +14,12 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
 public class BandageItem extends Item {
-    private static final int COOLDOWN_TICKS = 60; // 3 секунды (20 тиков = 1 секунда)
+    private static final int COOLDOWN_TICKS = 60;
     private static final int MAX_USES = 4;
-    private static final float HEAL_AMOUNT = 6.0f; // Количество восстанавливаемого здоровья
+    private static final float HEAL_AMOUNT = 6.0f;
 
     public BandageItem(Properties properties) {
-        super(properties.defaultDurability(MAX_USES).setNoRepair());
+        super(properties.durability(MAX_USES).setNoRepair());
     }
 
     @Override
@@ -38,7 +38,9 @@ public class BandageItem extends Item {
             if (!level.isClientSide) {
                 // Основная логика лечения
                 player.heal(HEAL_AMOUNT);
-                stack.hurt(1, level.random, null);
+                stack.hurtAndBreak(1, player, (p) -> {
+                    p.broadcastBreakEvent(player.getUsedItemHand());
+                });
 
                 player.getCooldowns().addCooldown(this, COOLDOWN_TICKS);
             }

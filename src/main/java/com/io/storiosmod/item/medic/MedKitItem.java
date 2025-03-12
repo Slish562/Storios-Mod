@@ -19,7 +19,7 @@ public class MedKitItem extends Item {
     private static final float HEAL_AMOUNT = 20.0f;
 
     public MedKitItem(Properties properties) {
-        super(properties.defaultDurability(MAX_USES).setNoRepair());
+        super(properties.durability(MAX_USES).setNoRepair());
     }
 
     @Override
@@ -37,7 +37,9 @@ public class MedKitItem extends Item {
         if (entity instanceof Player player) {
             if (!level.isClientSide) {
                 player.heal(HEAL_AMOUNT);
-                stack.hurt(1, level.random, null);
+                stack.hurtAndBreak(1, player, (p) -> {
+                    p.broadcastBreakEvent(player.getUsedItemHand());
+                });
 
                 player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 800, 1));
 

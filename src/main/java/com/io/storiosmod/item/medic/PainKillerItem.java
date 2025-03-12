@@ -19,7 +19,7 @@ public class PainKillerItem extends Item {
     private static final float HEAL_AMOUNT = 10.0f;
 
     public PainKillerItem(Properties properties) {
-        super(properties.defaultDurability(MAX_USES).setNoRepair());
+        super(properties.durability(MAX_USES).setNoRepair());
     }
 
     @Override
@@ -37,7 +37,9 @@ public class PainKillerItem extends Item {
         if (entity instanceof Player player) {
             if (!level.isClientSide) {
                 player.heal(HEAL_AMOUNT);
-                stack.hurt(1, level.random, null);
+                stack.hurtAndBreak(1, player, (p) -> {
+                    p.broadcastBreakEvent(player.getUsedItemHand());
+                });
 
                 player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 100, 0));
                 level.playSound(null, player.getX(), player.getY(), player.getZ(),
