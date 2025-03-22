@@ -1,23 +1,18 @@
 package com.io.storiosmod;
 
-import com.io.storiosmod.entity.client.TestGeoBlockRenderer;
+import com.io.storiosmod.entity.client.GeoDirectionalBlockRenderer;
 import com.io.storiosmod.registries.BlockRegistry;
 import com.io.storiosmod.registries.CreativeTabRegistry;
 import com.io.storiosmod.registries.ItemRegistry;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
-import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -71,12 +66,11 @@ public class StoriosMod {
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }
-        /*
+
         @SubscribeEvent
         public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
-                event.registerBlockEntityRenderer(BlockRegistry.TESTGEOBLOCK_BE.get(), context -> new TestGeoBlockRenderer());
+                event.registerBlockEntityRenderer(BlockRegistry.MYTHRIL_CLUSTER_SMALL_BLOCK_ENTITY.get(), context -> new GeoDirectionalBlockRenderer());
             }
 
-         */
     }
 }

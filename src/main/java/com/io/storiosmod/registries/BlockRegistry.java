@@ -1,9 +1,8 @@
 package com.io.storiosmod.registries;
 
-import com.io.storiosmod.block.DirectionalBlock;
 import com.io.storiosmod.StoriosMod;
-import com.io.storiosmod.block.TestGeoBlock;
-import com.io.storiosmod.block.entity.TestGeoBlockEntity;
+import com.io.storiosmod.block.GeoDirectionalBlock;
+import com.io.storiosmod.block.entity.GeoDirectionalBlockEntity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -19,12 +18,16 @@ public class BlockRegistry {
         BLOCKS.register(eventBus);
         BLOCK_ENTITIES.register(eventBus);
     }
+
+    public static final RegistryObject<BlockEntityType<GeoDirectionalBlockEntity>> MYTHRIL_CLUSTER_SMALL_BLOCK_ENTITY = BLOCK_ENTITIES.register("mythril_cluster_small_be",
+            ()-> BlockEntityType.Builder.of(GeoDirectionalBlockEntity::new, BlockRegistry.MYTHRIL_CLUSTER_SMALL_BLOCK.get()).build(null));
+
     /*
     public static final RegistryObject<BlockEntityType<TestGeoBlockEntity>> TESTGEOBLOCK_BE = BLOCK_ENTITIES.register("test_block_be",
             ()-> BlockEntityType.Builder.of(TestGeoBlockEntity::new, BlockRegistry.TESTGEOBLOCK.get()).build(null));
 
      */
 
-    public static final RegistryObject<Block> MYTHRIL_BLOCK = BLOCKS.register("mythril_cluster", () -> new DirectionalBlock());
+    public static final RegistryObject<Block> MYTHRIL_CLUSTER_SMALL_BLOCK = BLOCKS.register("mythril_cluster_small", () -> new GeoDirectionalBlock());
    // public static final RegistryObject<Block> TESTGEOBLOCK = BLOCKS.register("test_block", () -> new TestGeoBlock());
 }

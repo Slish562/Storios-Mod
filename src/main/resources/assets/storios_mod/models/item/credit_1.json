@@ -1,6 +1,6 @@
 {    
 "parent": "item/generated",    
 "textures": {        
-  "layer0": "storios_mod:item/gears/copper_gear"   
+  "layer0": "storios_mod:item/wallet/credit_1"
    }
   }

@@ -9,11 +9,11 @@ import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class TestGeoBlockEntity extends BlockEntity implements GeoBlockEntity {
+public class GeoDirectionalBlockEntity extends BlockEntity implements GeoBlockEntity {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
-    public TestGeoBlockEntity(BlockPos pos, BlockState state) {
-        super(null/*BlockRegistry.TESTGEOBLOCK_BE.get()*/, pos, state);
+    public GeoDirectionalBlockEntity(BlockPos pos, BlockState state) {
+        super(BlockRegistry.MYTHRIL_CLUSTER_SMALL_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override

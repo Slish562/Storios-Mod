@@ -1,13 +1,16 @@
 {
   "item.storios_mod.mythril": "Mythril",
+  "block.storios_mod.mythril_cluster_small": "Mythril Cluster Small",
+  "item.storios_mod.mythril_cluster_small_item": "Mythril Cluster Small",
+  "item.storios_mod.rough_mythril": "Rough Mythril",
   "item.storios_mod.mythril_cluster": "Mythril Cluster",
   "item.storios_mod.fiorellite": "Fiorellite",
   "item.storios_mod.luminaris": "Luminaris",
-  "item.storios_mod.copper_gear": "Copper Gear",
-  "item.storios_mod.steel_gear": "Steel Gear",
-  "item.storios_mod.cobalt_gear": "Cobalt Gear",
-  "item.storios_mod.jade_gear": "Jade Gear",
-  "item.storios_mod.iridium_gear": "Iridium Gear",
+  "item.storios_mod.credit_1": "1 Credit Wallet",
+  "item.storios_mod.credit_10": "10 Credit Wallet",
+  "item.storios_mod.credit_100": "100 Credit Wallet",
+  "item.storios_mod.credit_1000": "1000 Credit Wallet",
+  "item.storios_mod.credit_10000": "10000 Credit Wallet",
 
   "item.storios_mod.bandage": "Bandage",
   "item.storios_mod.painkiller": "Painkiller",
@@ -15,7 +18,10 @@
   "item.storios_mod.medkit": "Medkit",
 
 
-  "block.storios_mod.mythril_cluster": "Mythril Cluster",
+  "item.storios_mod.battery_small": "Battery Small",
+  "item.storios_mod.battery_normal": "Battery Normal",
+  "item.storios_mod.monitor_device_active": "monitor_device_active",
+  "item.storios_mod.monitor_device_inactive": "monitor_device_inactive",
 
   "itemGroup.storios_mod.story_items_tab": "Story Items"
 }

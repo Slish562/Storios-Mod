@@ -1,17 +1,15 @@
 package com.io.storiosmod.block;
 
-
+import com.io.storiosmod.registries.BlockRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -21,28 +19,37 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.PushReaction;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
-public class DirectionalBlock extends Block implements SimpleWaterloggedBlock {
+public class GeoDirectionalBlock extends Block implements /*SimpleWaterloggedBlock,*/ EntityBlock  {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
+    private static final VoxelShape SHAPE_UP = Block.box(-1.0D, 0.0D, 2.0D, 6.0D, 9.0D, 7.0D);
+/*
+    private static final VoxelShape SHAPE_UP = Block.box(2.0D, 0.0D, 0.0D, 10.0D, 10.0D, 10.0D);
+    private static final VoxelShape SHAPE_DOWN = Block.box(2.0D, 0.0D, 2.0D, 10.0D, 16.0D, 10.0D);
+    private static final VoxelShape SHAPE_EAST = Block.box(2.0D, 0.0D, 2.0D, 10.0D, 10.0D, 10.0D);
+    private static final VoxelShape SHAPE_WEST = Block.box(2.0D, 0.0D, 2.0D, 16.0D, 10.0D, 10.0D);
+    private static final VoxelShape SHAPE_NORTH = Block.box(2.0D, 0.0D, 2.0D, 10.0D, 10.0D, 16.0D);
+    private static final VoxelShape SHAPE_SOUTH = Block.box(2.0D, 0.0D, 0.0D, 10.0D, 10.0D, 10.0D);
 
-    private static final VoxelShape SHAPE_UP = Block.box(0.0D, 0.0D, 0.0D, 10.0D, 10.0D, 10.0D);
-    private static final VoxelShape SHAPE_DOWN = Block.box(2.0D, 2.0D, 2.0D, 10.0D, 16.0D, 10.0D);
-    private static final VoxelShape SHAPE_EAST = Block.box(0.0D, 2.0D, 2.0D, 10.0D, 10.0D, 10.0D);
-    private static final VoxelShape SHAPE_WEST = Block.box(2.0D, 2.0D, 2.0D, 16.0D, 10.0D, 10.0D);
-    private static final VoxelShape SHAPE_NORTH = Block.box(2.0D, 2.0D, 2.0D, 10.0D, 10.0D, 16.0D);
-    private static final VoxelShape SHAPE_SOUTH = Block.box(2.0D, 2.0D, 0.0D, 10.0D, 10.0D, 10.0D);
 
-    public DirectionalBlock() {
+ */
+    public GeoDirectionalBlock() {
         super(BlockBehaviour.Properties.of().mapColor(DyeColor.WHITE).requiresCorrectToolForDrops().strength(2F, 6.0F).noOcclusion().dynamicShape().lightLevel((i) -> 2).emissiveRendering((state, level, pos) -> true));
 
     }
 
+
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+
+        return SHAPE_UP;
+
+    }
+/*
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         Direction direction = state.getValue(FACING);
         BlockPos blockpos = pos.relative(direction.getOpposite());
@@ -83,6 +90,16 @@ public class DirectionalBlock extends Block implements SimpleWaterloggedBlock {
         return this.defaultBlockState().setValue(WATERLOGGED, Boolean.valueOf(levelaccessor.getFluidState(blockpos).getType() == Fluids.WATER)).setValue(FACING, context.getClickedFace());
     }
 
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
+        return this.defaultBlockState()
+                .setValue(FACING, context.getClickedFace())
+                .setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
+    }
+
+
+
     public BlockState rotate(BlockState state, Rotation rotation) {
         return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
     }
@@ -101,5 +118,17 @@ public class DirectionalBlock extends Block implements SimpleWaterloggedBlock {
 
     public PushReaction getPistonPushReaction(BlockState blockState) {
         return PushReaction.DESTROY;
+    }
+
+    */
+    @Override
+    public RenderShape getRenderShape(BlockState state) {
+        return RenderShape.ENTITYBLOCK_ANIMATED;
+    }
+
+    @org.jetbrains.annotations.Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return BlockRegistry.MYTHRIL_CLUSTER_SMALL_BLOCK_ENTITY.get().create(pos, state);
     }
 }

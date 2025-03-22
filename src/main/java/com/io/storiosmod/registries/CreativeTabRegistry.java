@@ -22,17 +22,22 @@ public class CreativeTabRegistry {
 
     public static final RegistryObject<CreativeModeTab> EQUIPMENT_TAB = TABS.register("story_items", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup." + StoriosMod.MODID + ".story_items_tab"))
-            .icon(() -> new ItemStack(ItemRegistry.COPPER_GEAR.get()))
+            .icon(() -> new ItemStack(ItemRegistry.CREDIT_1.get()))
             .displayItems((enabledFeatures, entries) -> {
-                entries.accept(ItemRegistry.MYTHRIL_CLASTER.get());
+                entries.accept(ItemRegistry.MYTHRIL_CLUSTER_SMALL_ITEM.get());
+                entries.accept(ItemRegistry.ROUGH_MYTHRIL.get());
                 entries.accept(ItemRegistry.MYTHRIL.get());
                 entries.accept(ItemRegistry.FIORELLITE.get());
                 entries.accept(ItemRegistry.LUMINARIS.get());
-                entries.accept(ItemRegistry.COPPER_GEAR.get());
-                entries.accept(ItemRegistry.STEEL_GEAR.get());
-                entries.accept(ItemRegistry.COBALT_GEAR.get());
-                entries.accept(ItemRegistry.JADE_GEAR.get());
-                entries.accept(ItemRegistry.IRIDIUM_GEAR.get());
+                entries.accept(ItemRegistry.CREDIT_1.get());
+                entries.accept(ItemRegistry.CREDIT_10.get());
+                entries.accept(ItemRegistry.CREDIT_100.get());
+                entries.accept(ItemRegistry.CREDIT_1000.get());
+                entries.accept(ItemRegistry.CREDIT_10000.get());
+                entries.accept(ItemRegistry.BATTERY_SMALL.get());
+                entries.accept(ItemRegistry.BATTERY_NORMAL.get());
+                entries.accept(ItemRegistry.MONITOR_DEVICE_ACTIVE.get());
+                entries.accept(ItemRegistry.MONITOR_DEVICE_INACTIVE.get());
                 entries.accept(ItemRegistry.NOTE.get());
                 entries.accept(ItemRegistry.LETTER.get());
                 entries.accept(ItemRegistry.SCROLL.get());
