@@ -27,7 +27,7 @@ import javax.annotation.Nullable;
 public class GeoDirectionalBlock extends Block implements /*SimpleWaterloggedBlock,*/ EntityBlock  {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
-    private static final VoxelShape SHAPE_UP = Block.box(-1.0D, 0.0D, 2.0D, 6.0D, 9.0D, 7.0D);
+    private static final VoxelShape SHAPE_UP = Block.box(-1.0D, 0.0D, 2.0D, 6.0D, 8.0D, 6.0D);
 /*
     private static final VoxelShape SHAPE_UP = Block.box(2.0D, 0.0D, 0.0D, 10.0D, 10.0D, 10.0D);
     private static final VoxelShape SHAPE_DOWN = Block.box(2.0D, 0.0D, 2.0D, 10.0D, 16.0D, 10.0D);

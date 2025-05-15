@@ -45,7 +45,12 @@ public class CreativeTabRegistry {
                 entries.accept(ItemRegistry.PAINKILLER.get());
                 entries.accept(ItemRegistry.MORPHINE.get());
                 entries.accept(ItemRegistry.MEDKIT.get());
-
+                entries.accept(ItemRegistry.PURPLE_FILM.get());
+                entries.accept(ItemRegistry.PINK_FILM.get());
+                entries.accept(ItemRegistry.GREEN_FILM.get());
+                entries.accept(ItemRegistry.PURPLE_MONITOR.get());
+                entries.accept(ItemRegistry.PURPLE_SHARD.get());
+                entries.accept(ItemRegistry.BIG_TEST_TUBE.get());
             })
             .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
             .build());

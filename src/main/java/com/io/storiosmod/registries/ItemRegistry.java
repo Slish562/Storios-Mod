@@ -35,6 +35,14 @@ public class ItemRegistry {
     public static final RegistryObject<Item> MONITOR_DEVICE_ACTIVE = ITEMS.register("monitor_device_active", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> MONITOR_DEVICE_INACTIVE = ITEMS.register("monitor_device_inactive", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
 
+
+    public static final RegistryObject<Item> GREEN_FILM = ITEMS.register("green_film", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> PINK_FILM = ITEMS.register("pink_film", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> PURPLE_FILM = ITEMS.register("purple_film", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> PURPLE_MONITOR = ITEMS.register("purple_monitor", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> PURPLE_SHARD = ITEMS.register("purple_shard", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> BIG_TEST_TUBE = ITEMS.register("big_test_tube", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
+
     public static final RegistryObject<Item> ROUGH_MYTHRIL = ITEMS.register("rough_mythril", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> MYTHRIL = ITEMS.register("mythril", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> FIORELLITE = ITEMS.register("fiorellite", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
