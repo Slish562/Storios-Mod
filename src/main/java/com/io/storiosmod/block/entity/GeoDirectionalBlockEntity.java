@@ -6,7 +6,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class GeoDirectionalBlockEntity extends BlockEntity implements GeoBlockEntity {
@@ -17,7 +16,8 @@ public class GeoDirectionalBlockEntity extends BlockEntity implements GeoBlockEn
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+    public void registerControllers(software.bernie.geckolib.core.animation.AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        // Добавь контроллеры анимаций здесь, если нужны
     }
 
     @Override
@@ -25,4 +25,3 @@ public class GeoDirectionalBlockEntity extends BlockEntity implements GeoBlockEn
         return this.cache;
     }
 }
-

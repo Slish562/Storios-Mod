@@ -1,6 +1,8 @@
 package com.io.storiosmod.registries;
 
 import com.io.storiosmod.StoriosMod;
+import com.io.storiosmod.item.food.CannedFood;
+import com.io.storiosmod.item.magic.crystals.MythrilClusterBlockItem;
 import com.io.storiosmod.item.medic.*;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -50,4 +52,16 @@ public class ItemRegistry {
     public static final RegistryObject<Item> NOTE = ITEMS.register("note", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> SCROLL = ITEMS.register("scroll", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> LETTER = ITEMS.register("letter", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> EMPTY_CAN = ITEMS.register("empty_can", () ->
+            new CannedFood.Builder(new Item.Properties().stacksTo(1)).build()
+    );
+    public static final RegistryObject<Item> CANNED_FOOD = ITEMS.register("canned_food", () ->
+            new CannedFood.Builder(new Item.Properties().stacksTo(1))
+                    .uses(4)
+                    .cooldown(60)
+                    .container(EMPTY_CAN.get())
+                    .standardFood(4, 1f)
+                    .build()
+    );
+
 }

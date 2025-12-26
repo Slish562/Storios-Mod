@@ -1,8 +1,7 @@
 package com.io.storiosmod.entity.client;
 
 import com.io.storiosmod.StoriosMod;
-import com.io.storiosmod.block.entity.GeoDirectionalBlockEntity;
-import com.io.storiosmod.item.medic.MythrilClusterBlockItem;
+import com.io.storiosmod.item.magic.crystals.MythrilClusterBlockItem;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 

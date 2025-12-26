@@ -51,6 +51,8 @@ public class CreativeTabRegistry {
                 entries.accept(ItemRegistry.PURPLE_MONITOR.get());
                 entries.accept(ItemRegistry.PURPLE_SHARD.get());
                 entries.accept(ItemRegistry.BIG_TEST_TUBE.get());
+                entries.accept(ItemRegistry.EMPTY_CAN.get());
+                entries.accept(ItemRegistry.CANNED_FOOD.get());
             })
             .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
             .build());
