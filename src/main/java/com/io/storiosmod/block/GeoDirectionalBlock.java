@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
@@ -24,10 +25,11 @@ import org.jetbrains.annotations.Nullable;
 public class GeoDirectionalBlock extends Block implements EntityBlock {
 
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public GeoDirectionalBlock() {
         super(BlockBehaviour.Properties.of()
                 .mapColor(net.minecraft.world.item.DyeColor.CYAN)
-                .strength(2.0F, 6.0F)
+                .strength(50.0F, 1200.0F) // как у обсидиана: hardness 50, blast resistance 1200
                 .requiresCorrectToolForDrops()
                 .noOcclusion()
                 .dynamicShape()
@@ -35,7 +37,9 @@ public class GeoDirectionalBlock extends Block implements EntityBlock {
                 .emissiveRendering((state, level, pos) -> true)
         );
 
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.UP));
+        this.registerDefaultState(this.stateDefinition.any()
+                .setValue(FACING, Direction.UP)
+                .setValue(WATERLOGGED, false));
     }
 
     @Override
@@ -48,8 +52,14 @@ public class GeoDirectionalBlock extends Block implements EntityBlock {
         BlockPos attachPos = pos.relative(clickedFace.getOpposite());
         BlockState attachState = level.getBlockState(attachPos);
 
-        if (attachState.isFaceSturdy(level, attachPos, clickedFace)) {
-            return this.defaultBlockState().setValue(FACING, clickedFace);
+        boolean canAttach = attachState.isFaceSturdy(level, attachPos, clickedFace);
+
+        FluidState fluid = context.getLevel().getFluidState(pos);
+        boolean inFluid = !fluid.isEmpty();
+
+        if (canAttach || inFluid) {
+            BlockState state = this.defaultBlockState().setValue(FACING, clickedFace);
+            return state.setValue(WATERLOGGED, fluid.getType() == Fluids.WATER || fluid.getType() == Fluids.FLOWING_WATER);
         }
 
         return null;
@@ -66,10 +76,19 @@ public class GeoDirectionalBlock extends Block implements EntityBlock {
     @Override
     public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState,
                                   LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+        if (state.getValue(WATERLOGGED)) {
+            level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        }
+
         if (!state.canSurvive(level, pos)) {
             return Blocks.AIR.defaultBlockState();
         }
         return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
+    }
+
+    @Override
+    public FluidState getFluidState(BlockState state) {
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override
@@ -121,7 +140,7 @@ public class GeoDirectionalBlock extends Block implements EntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
+        builder.add(FACING, WATERLOGGED);
     }
 
     @Override

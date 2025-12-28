@@ -21,10 +21,37 @@ public class ItemRegistry {
     public static final RegistryObject<Item> MYTHRIL_CLUSTER_SMALL_ITEM = ITEMS.register("mythril_cluster_small", () -> new MythrilClusterBlockItem(BlockRegistry.MYTHRIL_CLUSTER_SMALL_BLOCK.get(), new Item.Properties().rarity(Rarity.EPIC)));
     //public static final RegistryObject<Item> TEST_GEOB = ITEMS.register("test_geob", () -> new BlockItem(BlockRegistry.TESTGEOBLOCK.get(), new Item.Properties().rarity(Rarity.EPIC)));
 
-    public static final RegistryObject<Item> BANDAGE = ITEMS.register("bandage", () -> new BandageItem(new Item.Properties().rarity(Rarity.COMMON)));
-    public static final RegistryObject<Item> PAINKILLER = ITEMS.register("painkiller", () -> new PainKillerItem(new Item.Properties().rarity(Rarity.COMMON)));
-    public static final RegistryObject<Item> MORPHINE = ITEMS.register("morphine", () -> new MorphineItem(new Item.Properties().rarity(Rarity.COMMON)));
-    public static final RegistryObject<Item> MEDKIT = ITEMS.register("medkit", () -> new MedKitItem(new Item.Properties().rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> BANDAGE = ITEMS.register("bandage", () ->
+            new MedicalItem(
+                    4, 6.0f, 40, 60, 0, 0,
+                    false,
+                    new Item.Properties().rarity(Rarity.COMMON)
+            )
+    );
+
+    public static final RegistryObject<Item> PAINKILLER = ITEMS.register("painkiller", () ->
+            new MedicalItem(
+                    6, 10.0f, 60, 60, 100, 0,
+                    true,
+                    new Item.Properties().rarity(Rarity.COMMON)
+            )
+    );
+
+    public static final RegistryObject<Item> MORPHINE = ITEMS.register("morphine", () ->
+            new MedicalItem(
+                    4, 0.0f, 50, 60, 500, 0,
+                    true,
+                    new Item.Properties().rarity(Rarity.COMMON)
+            )
+    );
+
+    public static final RegistryObject<Item> MEDKIT = ITEMS.register("medkit", () ->
+            new MedicalItem(
+                    8, 20.0f, 80, 60, 800, 1,
+                    false,
+                    new Item.Properties().rarity(Rarity.UNCOMMON)
+            )
+    );
 
     public static final RegistryObject<Item> CREDIT_1 = ITEMS.register("credit_1", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> CREDIT_10 = ITEMS.register("credit_10", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
