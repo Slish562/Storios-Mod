@@ -16,8 +16,8 @@ public class GeoDirectionalBlockEntity extends BlockEntity implements GeoBlockEn
     }
 
     @Override
-    public void registerControllers(software.bernie.geckolib.core.animation.AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        // Добавь контроллеры анимаций здесь, если нужны
+    public void registerControllers(
+            software.bernie.geckolib.core.animation.AnimatableManager.ControllerRegistrar controllerRegistrar) {
     }
 
     @Override

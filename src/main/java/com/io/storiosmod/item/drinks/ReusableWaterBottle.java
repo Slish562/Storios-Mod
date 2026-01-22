@@ -60,6 +60,7 @@ public class ReusableWaterBottle extends Item {
 
                 if (player instanceof ServerPlayer serverPlayer) {
                     CriteriaTriggers.CONSUME_ITEM.trigger(serverPlayer, stack);
+                    com.io.storiosmod.compat.ThirstCompat.drink(player, purity, quenchAmount, hydration);
                 }
 
                 player.awardStat(Stats.ITEM_USED.get(this));
@@ -108,7 +109,6 @@ public class ReusableWaterBottle extends Item {
         return true;
     }
 
-
     public static class Builder {
         private final Item.Properties properties;
         private int maxUses = 1;
@@ -119,6 +119,7 @@ public class ReusableWaterBottle extends Item {
         private int purity = 3;
         private int quenchAmount = 25;
         private float hydration = 0.8f;
+
         public Builder(Item.Properties properties) {
             this.properties = properties;
         }
@@ -143,7 +144,7 @@ public class ReusableWaterBottle extends Item {
             return this;
         }
 
-        public Builder purity(int level) {  // 0-3
+        public Builder purity(int level) { // 0-3
             this.purity = Math.max(0, Math.min(3, level));
             return this;
         }

@@ -1,6 +1,7 @@
 package com.io.storiosmod.block;
 
 import com.io.storiosmod.registries.ItemRegistry;
+import com.io.storiosmod.compat.ThirstCompat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -24,10 +25,11 @@ public class CoolerBlock extends Block {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand,
+            BlockHitResult hit) {
         ItemStack stack = player.getItemInHand(hand);
 
-        if (!ModList.get().isLoaded("thirst")) {
+        if (!com.io.storiosmod.compat.ThirstCompat.isThirstLoaded()) {
             return InteractionResult.PASS;
         }
 
@@ -38,7 +40,8 @@ public class CoolerBlock extends Block {
             return InteractionResult.PASS;
         }
 
-        if (level.isClientSide) return InteractionResult.SUCCESS;
+        if (level.isClientSide)
+            return InteractionResult.SUCCESS;
 
         ItemStack filledBottle;
 
