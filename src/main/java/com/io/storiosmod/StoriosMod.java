@@ -38,25 +38,26 @@ public class StoriosMod {
 
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.addListener(this::registerCommands);
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event)
-    {
+    private void registerCommands(net.minecraftforge.event.RegisterCommandsEvent event) {
+        com.io.storiosmod.commands.SetMaxDurabilityCommand.register(event.getDispatcher());
+    }
+
+    private void commonSetup(final FMLCommonSetupEvent event) {
         LOGGER.info("HELLO FROM COMMON SETUP");
     }
 
     @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event)
-    {
+    public void onServerStarting(ServerStartingEvent event) {
         LOGGER.info("HELLO from server starting");
     }
 
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents
-    {
+    public static class ClientModEvents {
         @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event)
-        {
+        public static void onClientSetup(FMLClientSetupEvent event) {
             // Some client setup code
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
@@ -64,8 +65,9 @@ public class StoriosMod {
 
         @SubscribeEvent
         public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
-                event.registerBlockEntityRenderer(BlockRegistry.MYTHRIL_CLUSTER_SMALL_BLOCK_ENTITY.get(), context -> new GeoDirectionalBlockRenderer());
-            }
+            event.registerBlockEntityRenderer(BlockRegistry.MYTHRIL_CLUSTER_SMALL_BLOCK_ENTITY.get(),
+                    context -> new GeoDirectionalBlockRenderer());
+        }
 
     }
 }

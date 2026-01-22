@@ -15,27 +15,28 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class GeoDirectionalBlock extends Block implements EntityBlock {
+public class GeoDirectionalBlock extends Block implements EntityBlock, SimpleWaterloggedBlock {
 
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+
     public GeoDirectionalBlock() {
         super(BlockBehaviour.Properties.of()
                 .mapColor(net.minecraft.world.item.DyeColor.CYAN)
-                .strength(50.0F, 1200.0F) // как у обсидиана: hardness 50, blast resistance 1200
+                .strength(10.0F, 1200.0F)
                 .requiresCorrectToolForDrops()
                 .noOcclusion()
-                .dynamicShape()
+
                 .lightLevel(state -> 2)
-                .emissiveRendering((state, level, pos) -> true)
-        );
+                .emissiveRendering((state, level, pos) -> true));
 
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.UP)
@@ -54,78 +55,71 @@ public class GeoDirectionalBlock extends Block implements EntityBlock {
 
         boolean canAttach = attachState.isFaceSturdy(level, attachPos, clickedFace);
 
-        FluidState fluid = context.getLevel().getFluidState(pos);
-        boolean inFluid = !fluid.isEmpty();
+        FluidState fluid = level.getFluidState(pos);
 
-        if (canAttach || inFluid) {
+        if (canAttach || !fluid.isEmpty()) {
             BlockState state = this.defaultBlockState().setValue(FACING, clickedFace);
-            return state.setValue(WATERLOGGED, fluid.getType() == Fluids.WATER || fluid.getType() == Fluids.FLOWING_WATER);
+            return state.setValue(WATERLOGGED,
+                    fluid.getType() == Fluids.WATER || fluid.getType() == Fluids.FLOWING_WATER);
         }
 
         return null;
     }
 
     @Override
+    public boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
+        return false;
+    }
+
+    @Override
+    public boolean canBeReplaced(BlockState state, Fluid fluid) {
+        return false;
+    }
+
+    @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        Direction facing = state.getValue(FACING);
-        BlockPos attachPos = pos.relative(facing.getOpposite());
-        BlockState attachState = level.getBlockState(attachPos);
-        return attachState.isFaceSturdy(level, attachPos, facing);
+        return true;
+    }
+
+    @Override
+    public boolean placeLiquid(LevelAccessor level, BlockPos pos, BlockState state, FluidState fluidState) {
+        return false;
     }
 
     @Override
     public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState,
-                                  LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+            LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+
         if (state.getValue(WATERLOGGED)) {
             level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        if (!state.canSurvive(level, pos)) {
-            return Blocks.AIR.defaultBlockState();
-        }
-        return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
+        return state;
     }
 
     @Override
     public FluidState getFluidState(BlockState state) {
-        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+        return state.getValue(WATERLOGGED)
+                ? Fluids.WATER.getSource(false)
+                : super.getFluidState(state);
     }
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         Direction dir = state.getValue(FACING);
-
         return switch (dir) {
-            case UP    -> Block.box(3.0D, 0.0D, 3.0D, 13.0D, 11.0D, 13.0D);
-            case DOWN  -> Block.box(3.0D, 5.0D, 3.0D, 13.0D, 16.0D, 13.0D);
-            case NORTH -> Block.box(3.0D, 3.0D, 5.0D, 13.0D, 13.0D, 16.0D);
-            case SOUTH -> Block.box(3.0D, 3.0D, 0.0D, 13.0D, 13.0D, 11.0D);
-            case EAST  -> Block.box(0.0D, 3.0D, 3.0D, 11.0D, 13.0D, 13.0D);
-            case WEST  -> Block.box(5.0D, 3.0D, 3.0D, 16.0D, 13.0D, 13.0D);
+            case UP -> Block.box(4.5D, 0.0D, 4.5D, 11.5D, 8.0D, 11.5D);
+            case DOWN -> Block.box(4.5D, 8.0D, 4.5D, 11.5D, 16.0D, 11.5D);
+            case NORTH -> Block.box(4.5D, 4.5D, 8.0D, 11.5D, 11.5D, 16.0D);
+            case SOUTH -> Block.box(4.5D, 4.5D, 0.0D, 11.5D, 11.5D, 8.0D);
+            case EAST -> Block.box(0.0D, 4.5D, 4.5D, 8.0D, 11.5D, 11.5D);
+            case WEST -> Block.box(8.0D, 4.5D, 4.5D, 16.0D, 11.5D, 11.5D);
         };
     }
 
-    private static VoxelShape rotateShape(Direction from, Direction to, VoxelShape shape) {
-        VoxelShape[] buffer = new VoxelShape[]{shape, Shapes.empty()};
-
-        int times = (to.get2DDataValue() - from.get2DDataValue() + 4) % 4;
-        for (int i = 0; i < times; i++) {
-            buffer[1] = Shapes.or(buffer[1], buffer[0]);
-            buffer[0] = rotateHorizontal(buffer[0]);
-        }
-
-        if (to.getAxis() == Direction.Axis.Y) {
-            return buffer[1];
-        }
-
-        return buffer[1];
-    }
-
-    private static VoxelShape rotateHorizontal(VoxelShape shape) {
-        return Block.box(
-                16 - shape.max(Direction.Axis.Z), shape.min(Direction.Axis.Y), shape.min(Direction.Axis.X),
-                16 - shape.min(Direction.Axis.Z), shape.max(Direction.Axis.Y), shape.max(Direction.Axis.X)
-        );
+    @Override
+    public PushReaction getPistonPushReaction(BlockState state) {
+        return PushReaction.BLOCK;
     }
 
     @Override

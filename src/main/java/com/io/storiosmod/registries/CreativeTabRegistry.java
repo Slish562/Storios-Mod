@@ -1,63 +1,62 @@
-package com.yourmod.block;  // Замени на свой пакет
+package com.io.storiosmod.registries;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
+import com.io.storiosmod.StoriosMod;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.fml.ModList;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
 
-public class CoolerBlock extends Block {
-    public CoolerBlock(Properties properties) {
-        super(properties);
+@Mod.EventBusSubscriber(modid = StoriosMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+public class CreativeTabRegistry {
+
+    private static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, StoriosMod.MODID);
+
+    public static void register(IEventBus eventBus) {
+        TABS.register(eventBus);
     }
 
-    @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        ItemStack stack = player.getItemInHand(hand);
-
-        // Проверяем, загружен ли Thirst Was Taken и в руке стеклянная бутылочка
-        if (!ModList.get().isLoaded("thirst") || !stack.is(Items.GLASS_BOTTLE)) {
-            return InteractionResult.PASS;
-        }
-
-        if (level.isClientSide) return InteractionResult.SUCCESS;
-
-        // Создаём бутылку с водой (vanilla water potion)
-        ItemStack pureWaterBottle = PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER);
-
-        // Добавляем NBT для чистой воды из Thirst Was Taken
-        CompoundTag tag = pureWaterBottle.getOrCreateTag();
-        CompoundTag thirstTag = new CompoundTag();
-        thirstTag.putInt("purity", 3);  // 3 — максимум, pure water (проверь в игре, может быть 4)
-        tag.put("thirst", thirstTag);
-
-        // Выдаём игроку (стандартная логика для fill)
-        if (!player.getAbilities().instabuild) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setItemInHand(hand, pureWaterBottle);
-            } else if (!player.getInventory().add(pureWaterBottle)) {
-                player.drop(pureWaterBottle, false);
-            }
-        } else {
-            player.getInventory().add(pureWaterBottle);
-        }
-
-        // Звук наполнения бутылки и частицы
-        level.playSound(null, pos, SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
-        level.levelEvent(1002, pos, 0);  // Частицы (опционально, можно подобрать другой)
-
-        return InteractionResult.CONSUME;
-    }
+    public static final RegistryObject<CreativeModeTab> EQUIPMENT_TAB = TABS.register("story_items", () -> CreativeModeTab.builder()
+            .title(Component.translatable("itemGroup." + StoriosMod.MODID + ".story_items_tab"))
+            .icon(() -> new ItemStack(ItemRegistry.CREDIT_1.get()))
+            .displayItems((enabledFeatures, entries) -> {
+                entries.accept(ItemRegistry.MYTHRIL_CLUSTER_SMALL_ITEM.get());
+                entries.accept(ItemRegistry.ROUGH_MYTHRIL.get());
+                entries.accept(ItemRegistry.MYTHRIL.get());
+                entries.accept(ItemRegistry.FIORELLITE.get());
+                entries.accept(ItemRegistry.LUMINARIS.get());
+                entries.accept(ItemRegistry.CREDIT_1.get());
+                entries.accept(ItemRegistry.CREDIT_10.get());
+                entries.accept(ItemRegistry.CREDIT_100.get());
+                entries.accept(ItemRegistry.CREDIT_1000.get());
+                entries.accept(ItemRegistry.CREDIT_10000.get());
+                entries.accept(ItemRegistry.BATTERY_SMALL.get());
+                entries.accept(ItemRegistry.BATTERY_NORMAL.get());
+                entries.accept(ItemRegistry.MONITOR_DEVICE_ACTIVE.get());
+                entries.accept(ItemRegistry.MONITOR_DEVICE_INACTIVE.get());
+                entries.accept(ItemRegistry.NOTE.get());
+                entries.accept(ItemRegistry.LETTER.get());
+                entries.accept(ItemRegistry.SCROLL.get());
+                entries.accept(ItemRegistry.BANDAGE.get());
+                entries.accept(ItemRegistry.PAINKILLER.get());
+                entries.accept(ItemRegistry.MORPHINE.get());
+                entries.accept(ItemRegistry.MEDKIT.get());
+                entries.accept(ItemRegistry.PURPLE_FILM.get());
+                entries.accept(ItemRegistry.PINK_FILM.get());
+                entries.accept(ItemRegistry.GREEN_FILM.get());
+                entries.accept(ItemRegistry.PURPLE_MONITOR.get());
+                entries.accept(ItemRegistry.PURPLE_SHARD.get());
+                entries.accept(ItemRegistry.BIG_TEST_TUBE.get());
+                entries.accept(ItemRegistry.UNKNOWN_POTION.get());
+                entries.accept(ItemRegistry.EMPTY_CAN.get());
+                entries.accept(ItemRegistry.CANNED_FOOD.get());
+                entries.accept(ItemRegistry.COOLER_ITEM.get());
+            })
+            .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
+            .build());
 }
+

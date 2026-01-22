@@ -1,6 +1,7 @@
 package com.io.storiosmod.registries;
 
 import com.io.storiosmod.StoriosMod;
+import com.io.storiosmod.item.drinks.ReusableWaterBottle;
 import com.io.storiosmod.item.food.CannedFood;
 import com.io.storiosmod.item.magic.crystals.MythrilClusterBlockItem;
 import com.io.storiosmod.item.medic.*;
@@ -11,6 +12,8 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
+import static com.io.storiosmod.registries.BlockRegistry.COOLER;
 
 public class ItemRegistry {
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, StoriosMod.MODID);
@@ -76,6 +79,7 @@ public class ItemRegistry {
     public static final RegistryObject<Item> MYTHRIL = ITEMS.register("mythril", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> FIORELLITE = ITEMS.register("fiorellite", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> LUMINARIS = ITEMS.register("luminaris", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
+    public static final RegistryObject<Item> UNKNOWN_POTION = ITEMS.register("unknown_potion", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> NOTE = ITEMS.register("note", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> SCROLL = ITEMS.register("scroll", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> LETTER = ITEMS.register("letter", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
@@ -90,5 +94,22 @@ public class ItemRegistry {
                     .standardFood(4, 1f)
                     .build()
     );
+    public static final RegistryObject<Item> REUSABLE_BOTTLE_EMPTY = ITEMS.register("reusable_bottle_empty",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+
+    public static final RegistryObject<Item> REUSABLE_BOTTLE = ITEMS.register("reusable_bottle_pure",
+            () -> new ReusableWaterBottle.Builder(new Item.Properties().stacksTo(1))
+                    .uses(1)  // бесконечная
+                    .container(REUSABLE_BOTTLE_EMPTY.get())
+                    .purity(4)
+                    .quench(30)
+                    .hydration(1.0f)
+                    .duration(32)
+                    .cooldown(20)
+                    .build()
+    );
+
+    public static final RegistryObject<Item> COOLER_ITEM = ITEMS.register("cooler_block", () -> new BlockItem(COOLER.get(), new Item.Properties()));
+
 
 }

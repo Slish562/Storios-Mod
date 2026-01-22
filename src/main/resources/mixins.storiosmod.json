@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.io.storiosmod.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "mixins.storiosmod.refmap.json",
+  "mixins": [
+    "ItemStackMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

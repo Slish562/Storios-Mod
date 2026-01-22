@@ -42,6 +42,5 @@ public class MythrilClusterBlockItem extends BlockItem implements GeoItem {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        // Если нужны анимации для предмета — добавь контроллеры здесь
     }
 }

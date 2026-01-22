@@ -1,10 +1,12 @@
 package com.io.storiosmod.registries;
 
 import com.io.storiosmod.StoriosMod;
+import com.io.storiosmod.block.CoolerBlock;
 import com.io.storiosmod.block.GeoDirectionalBlock;
 import com.io.storiosmod.block.entity.GeoDirectionalBlockEntity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -19,6 +21,8 @@ public class BlockRegistry {
         BLOCK_ENTITIES.register(eventBus);
     }
 
+    public static final RegistryObject<Block> COOLER = BLOCKS.register("cooler_block",
+            () -> new CoolerBlock(BlockBehaviour.Properties.of().strength(1.5f).requiresCorrectToolForDrops()));
     public static final RegistryObject<BlockEntityType<GeoDirectionalBlockEntity>> MYTHRIL_CLUSTER_SMALL_BLOCK_ENTITY = BLOCK_ENTITIES.register("mythril_cluster_small_be",
             ()-> BlockEntityType.Builder.of(GeoDirectionalBlockEntity::new, BlockRegistry.MYTHRIL_CLUSTER_SMALL_BLOCK.get()).build(null));
 
