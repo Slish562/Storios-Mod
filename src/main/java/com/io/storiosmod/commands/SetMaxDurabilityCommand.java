@@ -30,6 +30,7 @@ public class SetMaxDurabilityCommand {
             CompoundTag tag = item.getOrCreateTag();
             tag.putInt("storiosmod:max_damage", amount);
             item.setTag(tag);
+            item.setDamageValue(0);
 
             context.getSource().sendSuccess(() -> Component.literal("Max durability set to " + amount), true);
             return 1;
