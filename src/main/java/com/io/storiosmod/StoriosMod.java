@@ -35,6 +35,7 @@ public class StoriosMod {
         CreativeTabRegistry.register(modEventBus);
         AttributesRegistry.register(modEventBus);
         GeckoLib.initialize();
+        com.io.storiosmod.network.PacketHandler.register();
 
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
@@ -43,6 +44,8 @@ public class StoriosMod {
 
     private void registerCommands(net.minecraftforge.event.RegisterCommandsEvent event) {
         com.io.storiosmod.commands.SetMaxDurabilityCommand.register(event.getDispatcher());
+        com.io.storiosmod.commands.GradientCommand.register(event.getDispatcher());
+        com.io.storiosmod.commands.GradientTitleCommand.register(event.getDispatcher());
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -58,6 +61,7 @@ public class StoriosMod {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
+            com.io.storiosmod.client.ClientTitleHandler.register();
             // Some client setup code
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
