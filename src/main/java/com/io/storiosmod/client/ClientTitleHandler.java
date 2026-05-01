@@ -68,9 +68,9 @@ public class ClientTitleHandler {
         int maxTicks = fadeInTicks + stayTicks + fadeOutTicks;
         int current = displayTicks;
 
-        if (current > stayTicks + fadeOutTicks) { // Fading in
+        if (current > stayTicks + fadeOutTicks) {
             opacity = (fadeInTicks > 0) ? (float) (maxTicks - current) / (float) fadeInTicks : 1.0f;
-        } else if (current <= fadeOutTicks) { // Fading out
+        } else if (current <= fadeOutTicks) {
             opacity = (fadeOutTicks > 0) ? (float) current / (float) fadeOutTicks : 1.0f;
         }
 
@@ -83,11 +83,9 @@ public class ClientTitleHandler {
 
         float textWidth = mc.font.width(currentMessage);
 
-        // Calculate Position
         float x = 0;
         float y = 0;
 
-        // Horizontal
         switch (hAnchor.toLowerCase()) {
             case "left":
                 x = 0;
@@ -101,7 +99,6 @@ public class ClientTitleHandler {
         }
         x += hOffset;
 
-        // Vertical
         switch (vAnchor.toLowerCase()) {
             case "top":
                 y = 0;
@@ -119,14 +116,13 @@ public class ClientTitleHandler {
         guiGraphics.pose().scale(scale, scale, 1.0f);
 
         float drawX = 0;
-        float drawY = 0; // Default Top
+        float drawY = 0;
 
         if (hAnchor.equalsIgnoreCase("center")) {
             drawX = -textWidth / 2.0f;
         } else if (hAnchor.equalsIgnoreCase("right")) {
             drawX = -textWidth;
         }
-        // If Left, drawX is 0.
 
         if (vAnchor.equalsIgnoreCase("center")) {
             drawY = -mc.font.lineHeight / 2.0f;

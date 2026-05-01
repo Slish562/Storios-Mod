@@ -18,11 +18,11 @@ public class GeoDirectionalBlockRenderer extends GeoBlockRenderer<GeoDirectional
 
     @Override
     public void actuallyRender(PoseStack poseStack, GeoDirectionalBlockEntity animatable,
-                               BakedGeoModel model, RenderType renderType,
-                               MultiBufferSource bufferSource, VertexConsumer buffer,
-                               boolean isReRender, float partialTick,
-                               int packedLight, int packedOverlay,
-                               float red, float green, float blue, float alpha) {
+            BakedGeoModel model, RenderType renderType,
+            MultiBufferSource bufferSource, VertexConsumer buffer,
+            boolean isReRender, float partialTick,
+            int packedLight, int packedOverlay,
+            float red, float green, float blue, float alpha) {
 
         BlockState blockState = animatable.getBlockState();
         Direction facing = Direction.UP;
@@ -33,7 +33,7 @@ public class GeoDirectionalBlockRenderer extends GeoBlockRenderer<GeoDirectional
 
         poseStack.pushPose();
 
-        applyRotationForFacing(facing, poseStack);
+        applyRotationForFacing(facing, poseStack, animatable.getBlockPos());
 
         super.actuallyRender(poseStack, animatable, model, renderType, bufferSource, buffer,
                 isReRender, partialTick, packedLight, packedOverlay,
@@ -42,7 +42,7 @@ public class GeoDirectionalBlockRenderer extends GeoBlockRenderer<GeoDirectional
         poseStack.popPose();
     }
 
-    private void applyRotationForFacing(Direction facing, PoseStack poseStack) {
+    private void applyRotationForFacing(Direction facing, PoseStack poseStack, BlockPos pos) {
         poseStack.translate(0.5, 0.5, 0.5);
 
         switch (facing) {
@@ -64,6 +64,15 @@ public class GeoDirectionalBlockRenderer extends GeoBlockRenderer<GeoDirectional
                 poseStack.mulPose(Axis.ZP.rotationDegrees(90f));
                 break;
         }
+
+        long seed = pos.asLong();
+        seed ^= seed >>> 16;
+        seed *= 0x85ebca6b;
+        seed ^= seed >>> 13;
+        seed *= 0xc2b2ae35;
+        seed ^= seed >>> 16;
+        float randomRot = (Math.abs(seed) % 360);
+        poseStack.mulPose(Axis.YP.rotationDegrees(randomRot));
 
         poseStack.translate(-0.5, -0.5, -0.5);
     }

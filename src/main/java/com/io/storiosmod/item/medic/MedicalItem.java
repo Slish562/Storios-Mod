@@ -23,18 +23,6 @@ public class MedicalItem extends Item {
     private final int regenAmplifier;
     private final boolean playDrinkSound;
 
-    /**
-     *  Medical item
-     *
-     * @param maxUses         Maximum number of uses (durability)
-     * @param healAmount      Amount of instant healing
-     * @param useDuration     Duration of use (in ticks)
-     * @param cooldownTicks   Cooldown after use (in ticks)
-     * @param regenDuration   Duration of regeneration effect (0 = no effect)
-     * @param regenAmplifier  Regeneration effect level (0-based)
-     * @param playDrinkSound  Whether to play the drinking sound
-     * @param properties      Item properties (rarity, etc.)
-     */
     public MedicalItem(int maxUses,
                        float healAmount,
                        int useDuration,

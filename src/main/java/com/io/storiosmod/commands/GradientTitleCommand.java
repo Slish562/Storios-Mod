@@ -30,7 +30,7 @@ public class GradientTitleCommand {
                 .requires(source -> source.hasPermission(2))
                 .then(Commands.argument("targets", EntityArgument.players())
                         .then(Commands.literal("custom")
-                                .then(Commands.argument("vAnchor", StringArgumentType.word()) // top, center, bottom
+                                .then(Commands.argument("vAnchor", StringArgumentType.word())
                                         .suggests((ctx, b) -> {
                                             b.suggest("top");
                                             b.suggest("center");
@@ -38,9 +38,7 @@ public class GradientTitleCommand {
                                             return b.buildFuture();
                                         })
                                         .then(Commands.argument("vOffset", IntegerArgumentType.integer())
-                                                .then(Commands.argument("hAnchor", StringArgumentType.word()) // left,
-                                                                                                              // center,
-                                                                                                              // right
+                                                .then(Commands.argument("hAnchor", StringArgumentType.word())
                                                         .suggests((ctx, b) -> {
                                                             b.suggest("left");
                                                             b.suggest("center");
@@ -101,9 +99,7 @@ public class GradientTitleCommand {
                                                                                                                                         ctx -> executeCustom(
                                                                                                                                                 ctx,
                                                                                                                                                 false)))))))))))))
-                                        .then(Commands.argument("location", StringArgumentType.word()) // title,
-                                                                                                       // subtitle,
-                                                                                                       // actionbar
+                                        .then(Commands.argument("location", StringArgumentType.word())
                                                 .suggests((context, builder) -> {
                                                     builder.suggest("title");
                                                     builder.suggest("subtitle");

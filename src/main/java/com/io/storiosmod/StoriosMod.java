@@ -46,6 +46,15 @@ public class StoriosMod {
         com.io.storiosmod.commands.SetMaxDurabilityCommand.register(event.getDispatcher());
         com.io.storiosmod.commands.GradientCommand.register(event.getDispatcher());
         com.io.storiosmod.commands.GradientTitleCommand.register(event.getDispatcher());
+        com.io.storiosmod.commands.PlayMusicCommand.register(event.getDispatcher());
+        com.io.storiosmod.commands.StopMusicCommand.register(event.getDispatcher());
+        com.io.storiosmod.commands.NicknameCommand.register(event.getDispatcher());
+        com.io.storiosmod.commands.MissedCommand.register(event.getDispatcher());
+        com.io.storiosmod.commands.ChatColorCommand.register(event.getDispatcher());
+        com.io.storiosmod.commands.ChatStyleCommand.register(event.getDispatcher());
+        com.io.storiosmod.commands.TabStyleCommand.register(event.getDispatcher());
+        com.io.storiosmod.commands.SidebarCommand.register(event.getDispatcher());
+        com.io.storiosmod.commands.CutsceneCommand.register(event.getDispatcher());
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -53,8 +62,26 @@ public class StoriosMod {
     }
 
     @SubscribeEvent
+    public void onPlayerChangeGameMode(
+            net.minecraftforge.event.entity.player.PlayerEvent.PlayerChangeGameModeEvent event) {
+        if (event.getEntity().getPersistentData().contains("storiosmod_prev_gamemode")) {
+            event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
         LOGGER.info("HELLO from server starting");
+        com.io.storiosmod.chat.ChatHistoryManager.init(
+                event.getServer().getServerDirectory().toPath());
+        com.io.storiosmod.chat.ChatStyleConfig.init(
+                event.getServer().getServerDirectory().toPath());
+        com.io.storiosmod.tablist.TabListManager.init(
+                event.getServer().getServerDirectory().toPath());
+        com.io.storiosmod.sidebar.SidebarManager.init(
+                event.getServer().getServerDirectory().toPath());
+        com.io.storiosmod.cutscene.CutsceneStorage.init(
+                event.getServer().getServerDirectory().toPath());
     }
 
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -62,7 +89,10 @@ public class StoriosMod {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             com.io.storiosmod.client.ClientTitleHandler.register();
-            // Some client setup code
+            com.io.storiosmod.client.ClientMusicHandler.register();
+            com.io.storiosmod.client.CutsceneCameraHandler.register();
+            com.io.storiosmod.client.CutscenePathRenderer.register();
+            com.io.storiosmod.client.CutsceneEditorManager.register();
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }
@@ -73,5 +103,9 @@ public class StoriosMod {
                     context -> new GeoDirectionalBlockRenderer());
         }
 
+        @SubscribeEvent
+        public static void registerKeyMappings(net.minecraftforge.client.event.RegisterKeyMappingsEvent event) {
+            com.io.storiosmod.client.CutsceneEditorManager.registerKeyMappings(event);
+        }
     }
 }

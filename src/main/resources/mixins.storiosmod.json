@@ -5,7 +5,12 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "mixins.storiosmod.refmap.json",
   "mixins": [
-    "ItemStackMixin"
+    "ItemStackMixin",
+    "ServerPlayerAccessor"
+  ],
+  "client": [
+    "CameraSetupMixin",
+    "ChatComponentHeadMixin"
   ],
   "injectors": {
     "defaultRequire": 1

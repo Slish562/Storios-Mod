@@ -144,7 +144,7 @@ public class ReusableWaterBottle extends Item {
             return this;
         }
 
-        public Builder purity(int level) { // 0-3
+        public Builder purity(int level) {
             this.purity = Math.max(0, Math.min(3, level));
             return this;
         }
